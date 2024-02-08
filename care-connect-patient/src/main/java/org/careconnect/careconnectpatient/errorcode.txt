@@ -1,0 +1,5 @@
+1000=exit by email or adhar
+
+1001=validation error
+
+1002=Resource not found
