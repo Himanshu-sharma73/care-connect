@@ -3,3 +3,5 @@
 1001=validation error
 
 1002=Resource not found
+
+1003=no doctorId and Specialization is present in Booking dto

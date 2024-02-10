@@ -3,16 +3,15 @@ package org.careconnect.careconnectpatient.controller;
 import jakarta.validation.Valid;
 import org.careconnect.careconnectpatient.entity.PatientEntity;
 import org.careconnect.careconnectpatient.exception.PatientExitException;
+import org.careconnect.careconnectpatient.exception.ResourceNotFoundException;
 import org.careconnect.careconnectpatient.repositry.PatientRepo;
 import org.careconnect.careconnectpatient.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class PatientController {
@@ -37,5 +36,20 @@ public class PatientController {
     @GetMapping("/patients")
     public List retrievePatients(){
         return patientRepo.findAll();
+    }
+
+    @GetMapping("/patients/{patientId}")
+    public ResponseEntity<ApiResponse> retrievePatientById(@PathVariable Long patientId) {
+        Optional<PatientEntity> optionalPatient = patientRepo.findById(patientId);
+        if (optionalPatient.isPresent()){
+            PatientEntity patientEntity=optionalPatient.get();
+            ApiResponse apiResponse=new ApiResponse();
+            apiResponse.setData(patientEntity);
+            return ResponseEntity.ok(apiResponse);
+        }
+
+        else {
+            throw new ResourceNotFoundException("Patient","Id",String.valueOf(patientId));
+        }
     }
 }

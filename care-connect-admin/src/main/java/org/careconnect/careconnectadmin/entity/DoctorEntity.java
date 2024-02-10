@@ -2,10 +2,7 @@ package org.careconnect.careconnectadmin.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.careconnect.careconnectadmin.versoning.Address;
 import org.careconnect.careconnectadmin.versoning.Name;
@@ -52,6 +49,8 @@ public class DoctorEntity {
     @NotBlank(message = "Enter Marital Status")
     private String maritalStatus;
 
-    private String specialization;
+    @NotNull(message="specialization cannot be null")
+    @Enumerated(EnumType.STRING)
+    private Specialization specialization;
 
 }
