@@ -24,7 +24,7 @@ public class PatientEntity {
     private Name name;
 
     @Past(message = "Enter correct Date")
-    @NotBlank(message = "Enter date")
+    @NotNull(message = "Enter date")
     private LocalDate birthdate;
 
     @NotBlank(message = "Enter Gender")

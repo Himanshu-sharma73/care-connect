@@ -20,7 +20,7 @@ public class BookingAppointment {
 
     private long doctorId;
 
-    private long patientId;
+    private Long patientId;
 
     private LocalDate appointmentDate;
 
