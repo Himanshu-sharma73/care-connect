@@ -39,7 +39,7 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(BookingDtoException.class)
     public ResponseEntity<ApiResponse> bookingDto(BookingDtoException e){
-        BookingException bookingException=new BookingException("1003","At least the specialty or doctor ID must be filled in","");
+        BookingException bookingException=new BookingException("1003",e.getMessage(),"");
         ApiResponse apiResponse=new ApiResponse();
         apiResponse.setError(bookingException);
         return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);

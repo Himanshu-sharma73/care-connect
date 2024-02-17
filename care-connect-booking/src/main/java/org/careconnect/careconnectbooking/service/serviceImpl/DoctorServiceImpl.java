@@ -5,6 +5,7 @@ import feign.FeignException;
 import org.careconnect.careconnectbooking.bookingproxy.AdminServiceFeignClient;
 import org.careconnect.careconnectbooking.controller.BookingController;
 import org.careconnect.careconnectbooking.dto.DoctorDto;
+import org.careconnect.careconnectbooking.exception.BookingDtoException;
 import org.careconnect.careconnectbooking.exception.ResourceNotFoundException;
 import org.careconnect.careconnectbooking.responce.ApiResponse;
 import org.careconnect.careconnectbooking.service.DoctorService;
@@ -57,10 +58,12 @@ public class DoctorServiceImpl implements DoctorService {
                 return doctorDto;
             }
             else{
-                throw new ResourceNotFoundException("Doctor", "Specialization", specialization);
+                throw new BookingDtoException((String) apiResponse.getError());
             }
         }catch (FeignException e){
-            throw new ResourceNotFoundException("Doctor", "Specialization", specialization);
+            String errorMessage = e.getMessage();
+            System.out.println("8888888888888"+e);
+            throw new ResourceNotFoundException(e.getMessage(), "Specialization", specialization);
         }
 
     }
