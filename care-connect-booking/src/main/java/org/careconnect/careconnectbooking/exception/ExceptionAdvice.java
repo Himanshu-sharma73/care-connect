@@ -39,7 +39,7 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(BookingDtoException.class)
     public ResponseEntity<ApiResponse> bookingDto(BookingDtoException e){
-        BookingException bookingException=new BookingException("1003",e.getMessage(),"");
+        BookingException bookingException=new BookingException("1003",e.getMessage(),"You are entering wrong details please check them");
         ApiResponse apiResponse=new ApiResponse();
         apiResponse.setError(bookingException);
         return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);

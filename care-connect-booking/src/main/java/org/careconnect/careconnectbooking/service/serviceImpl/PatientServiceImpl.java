@@ -1,10 +1,12 @@
 package org.careconnect.careconnectbooking.service.serviceImpl;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.FeignException;
 import org.careconnect.careconnectbooking.bookingproxy.PatientServiceFeignClient;
 import org.careconnect.careconnectbooking.controller.BookingController;
 import org.careconnect.careconnectbooking.dto.PatientDto;
+import org.careconnect.careconnectbooking.exception.BookingDtoException;
 import org.careconnect.careconnectbooking.exception.ResourceNotFoundException;
 import org.careconnect.careconnectbooking.responce.ApiResponse;
 import org.careconnect.careconnectbooking.service.PatientService;
@@ -39,10 +41,17 @@ public class PatientServiceImpl implements PatientService {
             } else {
                 throw new ResourceNotFoundException("Patient", "Id", String.valueOf(patientId));
             }
-        } catch (HttpClientErrorException ex) {
-            String errorMessage = ex.getResponseBodyAsString();
-            System.out.println(errorMessage);
+        } catch (FeignException e) {
+            String errorMessage = e.contentUTF8();
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = null;
+            try {
+                jsonNode = objectMapper.readTree(errorMessage);
+
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+            throw new BookingDtoException(jsonNode.get("error").get("errorDetails").asText());
         }
-        return null;
     }
 }

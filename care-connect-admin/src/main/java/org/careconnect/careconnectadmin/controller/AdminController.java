@@ -75,8 +75,8 @@ public class AdminController {
             throw new ResourceNotFoundException(
                     "Entered Specialization",
                     "Specialization",
-                    specialization +'\n'+
-                            "Available Specializations: " + Arrays.toString(Specialization.values())
+                    specialization +
+                            " Available Specializations: " + Arrays.toString(Specialization.values())
             );
         }
     }
