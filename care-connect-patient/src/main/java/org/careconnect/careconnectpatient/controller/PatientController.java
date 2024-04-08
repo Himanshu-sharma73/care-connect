@@ -47,7 +47,6 @@ public class PatientController {
             apiResponse.setData(patientEntity);
             return ResponseEntity.ok(apiResponse);
         }
-
         else {
             throw new ResourceNotFoundException("Patient","Id",String.valueOf(patientId));
         }

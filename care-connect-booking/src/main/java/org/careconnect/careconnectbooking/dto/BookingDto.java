@@ -14,8 +14,8 @@ public class BookingDto {
     @NotNull(message = "Patient id cannot be null")
     private Long patientId;
 
-    @Future(message = "Appointment data should b in future")
-    @NotNull(message = "Patient id cannot be null")
+    @Future(message = "Appointment Date should be in future")
+    @NotNull(message = "Appointment Date cannot be null")
     private LocalDate appointmentDate;
 
     private LocalTime appointmentStartTime;

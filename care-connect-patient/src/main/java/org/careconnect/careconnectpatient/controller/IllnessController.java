@@ -1,6 +1,7 @@
 package org.careconnect.careconnectpatient.controller;
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.careconnect.careconnectpatient.entity.PatientEntity;
 import org.careconnect.careconnectpatient.entity.PatientIllnessEntity;
 import org.careconnect.careconnectpatient.exception.ResourceNotFoundException;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RestController
 public class IllnessController {
 
@@ -46,6 +48,7 @@ public class IllnessController {
                 throw new ResourceNotFoundException("Illness","Id",String.valueOf(patient_Id));
             }
             else {
+                log.info("Patient found {}",illness);
                 ApiResponse apiResponse = new ApiResponse();
                 apiResponse.setData(illness);
                 return ResponseEntity.ok(apiResponse);

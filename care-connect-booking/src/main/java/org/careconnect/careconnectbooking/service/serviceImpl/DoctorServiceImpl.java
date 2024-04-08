@@ -1,5 +1,6 @@
 package org.careconnect.careconnectbooking.service.serviceImpl;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.FeignException;
 import org.careconnect.careconnectbooking.bookingproxy.AdminServiceFeignClient;
@@ -60,10 +61,17 @@ public class DoctorServiceImpl implements DoctorService {
             else{
                 throw new BookingDtoException((String) apiResponse.getError());
             }
-        }catch (FeignException e){
-            String errorMessage = e.getMessage();
-            System.out.println("8888888888888"+e);
-            throw new ResourceNotFoundException(e.getMessage(), "Specialization", specialization);
+        }catch (FeignException e) {
+            String errorMessage = e.contentUTF8();
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = null;
+            try {
+                jsonNode = objectMapper.readTree(errorMessage);
+
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+            throw new BookingDtoException(jsonNode.get("error").get("errorDetails").asText());
         }
 
     }
