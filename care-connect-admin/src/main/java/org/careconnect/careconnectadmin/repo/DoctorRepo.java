@@ -1,11 +1,13 @@
 package org.careconnect.careconnectadmin.repo;
 
-import org.careconnect.careconnectadmin.entity.DoctorEntity;
-import org.careconnect.careconnectadmin.entity.Specialization;
+import org.careconnect.careconnectcommon.entity.DoctorEntity;
+import org.careconnect.careconnectcommon.entity.Specialization;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public interface DoctorRepo extends JpaRepository<DoctorEntity,Long> {
     boolean existsByEmail(String email);
     boolean existsByAdharNo(long adharNo);

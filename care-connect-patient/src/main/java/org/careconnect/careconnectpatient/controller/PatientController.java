@@ -1,11 +1,11 @@
 package org.careconnect.careconnectpatient.controller;
 
 import jakarta.validation.Valid;
-import org.careconnect.careconnectpatient.entity.PatientEntity;
-import org.careconnect.careconnectpatient.exception.PatientExitException;
-import org.careconnect.careconnectpatient.exception.ResourceNotFoundException;
+import org.careconnect.careconnectcommon.entity.PatientEntity;
+import org.careconnect.careconnectcommon.exception.PatientExitException;
+import org.careconnect.careconnectcommon.exception.ResourceNotFoundException;
 import org.careconnect.careconnectpatient.repositry.PatientRepo;
-import org.careconnect.careconnectpatient.response.ApiResponse;
+import org.careconnect.careconnectcommon.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ public class PatientController {
             if(patientRepo.existsByEmail(patientEntity.getEmail())){
                 throw new PatientExitException("Patient","EmailId",patientEntity.getEmail());
             }else if(patientRepo.existsByAdharNo(patientEntity.getAdharNo())) {
-                throw new PatientExitException("Patient","AdharNo",String.valueOf(patientEntity.getAdharNo()));
+                throw new PatientExitException("Patient","Adhar Number",String.valueOf(patientEntity.getAdharNo()));
             }else {
                 PatientEntity savedPatient=patientRepo.save(patientEntity);
                 ApiResponse apiResponse=new ApiResponse();

@@ -1,16 +1,15 @@
 package org.careconnect.careconnectadmin.controller;
 
 import jakarta.validation.Valid;
-import org.careconnect.careconnectadmin.entity.DoctorEntity;
-import org.careconnect.careconnectadmin.entity.Specialization;
-import org.careconnect.careconnectadmin.exception.DoctorExitException;
-import org.careconnect.careconnectadmin.exception.ResourceNotFoundException;
+import org.careconnect.careconnectcommon.entity.DoctorEntity;
+import org.careconnect.careconnectcommon.entity.Specialization;
+import org.careconnect.careconnectcommon.exception.DoctorExitException;
+import org.careconnect.careconnectcommon.exception.ResourceNotFoundException;
 import org.careconnect.careconnectadmin.repo.DoctorRepo;
-import org.careconnect.careconnectadmin.response.ApiResponse;
+import org.careconnect.careconnectcommon.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.ResourceAccessException;
 
 import java.util.Arrays;
 import java.util.List;
