@@ -2,12 +2,12 @@ package org.careconnect.careconnectpatient.controller;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.careconnect.careconnectpatient.entity.PatientEntity;
-import org.careconnect.careconnectpatient.entity.PatientIllnessEntity;
-import org.careconnect.careconnectpatient.exception.ResourceNotFoundException;
+import org.careconnect.careconnectcommon.entity.PatientEntity;
+import org.careconnect.careconnectcommon.entity.PatientIllnessEntity;
+import org.careconnect.careconnectcommon.exception.ResourceNotFoundException;
 import org.careconnect.careconnectpatient.repositry.IllnessRepo;
 import org.careconnect.careconnectpatient.repositry.PatientRepo;
-import org.careconnect.careconnectpatient.response.ApiResponse;
+import org.careconnect.careconnectcommon.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

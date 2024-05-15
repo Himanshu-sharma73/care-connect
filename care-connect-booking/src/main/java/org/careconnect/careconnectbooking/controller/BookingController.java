@@ -2,15 +2,13 @@ package org.careconnect.careconnectbooking.controller;
 
 import jakarta.validation.Valid;
 import org.careconnect.careconnectbooking.dto.BookingDto;
+import org.careconnect.careconnectbooking.dto.CheckUpDto;
 import org.careconnect.careconnectbooking.dto.DoctorDto;
 import org.careconnect.careconnectbooking.dto.PatientDto;
-import org.careconnect.careconnectbooking.entity.bookingappointment.BookingAppointment;
-import org.careconnect.careconnectbooking.exception.BookingDtoException;
+import org.careconnect.careconnectcommon.entity.BookingAppointment;
 import org.careconnect.careconnectbooking.repo.BookingAppointmentRepository;
 import org.careconnect.careconnectbooking.responce.ApiResponse;
 import org.careconnect.careconnectbooking.service.BookingService;
-import org.careconnect.careconnectbooking.service.DoctorService;
-import org.careconnect.careconnectbooking.service.serviceImpl.BookingServiceImpl;
 import org.careconnect.careconnectbooking.service.serviceImpl.PatientServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +33,7 @@ public class BookingController {
     BookingService bookingService;
 
     @PostMapping("/patient/appointments")
-    public ResponseEntity<ApiResponse> smallMethod(@Valid @RequestBody BookingDto bookingDto) {
+    public ResponseEntity<ApiResponse> postBooking(@Valid @RequestBody BookingDto bookingDto) {
         PatientDto patientDto = patientService.getPatientById(bookingDto.getPatientId());
         DoctorDto doctorDto = bookingService.getDoctor(bookingDto);
 
@@ -50,4 +48,18 @@ public class BookingController {
 
     }
 
+    @GetMapping("/booking")
+    public ResponseEntity<ApiResponse> retrieveBooking(@RequestBody BookingDto bookingDto){
+        ApiResponse apiResponse=new ApiResponse();
+        apiResponse.setData(bookingService.getBookingAppointments(bookingDto));
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    @PostMapping("/checkup")
+    public ResponseEntity<ApiResponse> checkUp(@RequestBody CheckUpDto checkUpDto){
+        BookingAppointment bookingAppointments=bookingService.checkUp(checkUpDto);
+        ApiResponse apiResponse=new ApiResponse();
+        apiResponse.setData(bookingAppointments);
+        return ResponseEntity.ok(apiResponse);
+    }
 }

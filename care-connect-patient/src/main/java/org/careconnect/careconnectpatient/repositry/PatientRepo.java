@@ -1,6 +1,6 @@
 package org.careconnect.careconnectpatient.repositry;
 
-import org.careconnect.careconnectpatient.entity.PatientEntity;
+import org.careconnect.careconnectcommon.entity.PatientEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PatientRepo extends JpaRepository<PatientEntity,Long> {
